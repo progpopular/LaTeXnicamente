@@ -1,0 +1,77 @@
+\newcounter{chapter}
+\counterwithin{section}{chapter}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\newcommand*{\chapname}{Princípios Básicos}
+\newcommand*{\secname}{}
+
+\newcommand{\chapter}[2][-1]{
+  \refstepcounter{chapter}
+  \renewcommand*{\chapname}{#2}
+  \renewcommand*{\secname}{}
+  \ifnum#1<0\relax
+  \else
+    \setcounter{chapter}{#1}
+  \fi
+}
+\renewcommand*{\section}[2][-1]{
+  \refstepcounter{section}
+  \renewcommand*{\secname}{#2}
+  \ifnum#1<0\relax
+  \else
+    \setcounter{section}{#1}
+  \fi
+}
+
+\newcommand{\pagehdr}{
+\begin{minipage}{\linewidth}
+    \null
+    \textit{Capítulo \thechapter : \chapname}
+\end{minipage}
+}
+
+\newcommand{\subheader}{
+\begin{minipage}{\linewidth}
+
+    \null
+
+    {
+        \fontsize{48}{57}\selectfont
+        % \fontsize{40}{57}\selectfont
+        \thetitle
+    }
+
+    {
+      \vspace*{3mm}
+      \fontsize{24}{28}\selectfont
+      \sffamily
+      \ifnum\value{section}=0\relax
+        \thechapter. \chapname
+      \else
+        \thesection. \secname
+      \fi
+    }
+
+\end{minipage}
+}
+
+\newsavebox{\subcapafigure}
+
+\newcommand{\subcapa}[1][linear-regression]{
+\savebox{\subcapafigure}{\input{includes/img/#1}}
+\cleardoublepage
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[white] (current page.south west) rectangle (current page.north east);
+
+  \node[anchor=north west] (C) at ([yshift=-3mm,xshift=10mm]current page.north west) {\pagehdr};
+
+  \node[anchor=north] (T) at ([yshift=-12mm]current page.north) {\subheader};
+
+  \node[align=center, anchor=north] at ([xshift=0cm,yshift=0cm]current page.center) {\usebox{\subcapafigure}};
+
+  \node[anchor=south east, xshift=-0.3cm, yshift=0.3cm] at (current page.south east) {%
+    \worldflag[width=8mm]{BR}
+  };
+
+\end{tikzpicture}
+}
+%

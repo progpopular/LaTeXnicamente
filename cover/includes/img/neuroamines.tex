@@ -1,0 +1,18 @@
+{
+\renewcommand{\printatom}[1]{{\footnotesize\ensuremath{\mathsf{#1}}}}
+
+\setchemfig{cram width=0.4em,
+            angle increment=30,
+            atom sep=1.8em,
+            bond offset=0.2em,
+            double bond sep=0.3em,
+            stack sep = 0.2em,
+}
+
+\schemestart
+\chemname{\chemfig{*6((-HO)-=-(--[-1]-NH_2)=-(-HO)=)}}{Dopamina}
+\+
+\chemname{\chemfig{*6(-=*5(-\chembelow{N}{H}-=(-[2]-[0]-[2]NH_2)-)-=-(-HO)=)}}{Serotonina}
+\schemestop
+\chemnameinit{}
+}

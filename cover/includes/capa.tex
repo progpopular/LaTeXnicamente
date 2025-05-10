@@ -1,0 +1,47 @@
+\newcommand*{\thetitle}{\LaTeX nicamente}
+\newcommand*{\thesubtitle}{Uma abordagem moderna ao \LaTeX}
+
+\newcommand{\fullheader}{
+\begin{minipage}{\linewidth}
+
+    \centering
+    \setlength{\parskip}{0em}
+
+    \null
+
+    {
+        \fontsize{48}{57}\selectfont
+        % \fontsize{40}{57}\selectfont
+        \thetitle
+    }
+
+    \vspace*{3mm}
+
+    {
+        \fontsize{24}{28}\selectfont
+        \sffamily
+        \thesubtitle
+    }
+
+\end{minipage}
+}
+
+\newsavebox{\capafigure}
+
+\newcommand{\capa}[1][basic-code]{
+\savebox{\capafigure}{\input{includes/img/#1}}
+\cleardoublepage
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[white] (current page.south west) rectangle (current page.north east);
+
+  \node[anchor=north] (T) at ([yshift=-12mm]current page.north) {\fullheader};
+
+  \node[align=center, anchor=north] at ([xshift=0cm,yshift=0cm]current page.center) {\usebox{\capafigure}};
+
+  \node[anchor=south east, xshift=-0.3cm, yshift=0.3cm] at (current page.south east) {%
+    \worldflag[width=8mm]{BR}
+  };
+
+\end{tikzpicture}
+}
+%
